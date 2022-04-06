@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Entry;
+use App\Http\Controllers\API\EntryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +16,10 @@ use App\Models\Entry;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:sanctum')->group(function () {
 
-Route::middleware('auth:sanctum')->get('/entries', function (Request $request){
-    return Entry::all();
+    Route::prefix('v1')->group(function () {
+        Route::apiResource('entries', EntryController::class);
+    });
+
 });

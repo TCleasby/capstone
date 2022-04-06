@@ -1,38 +1,29 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Entry;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EntryController extends Controller
 {
-     /**
-     * Show the application dashboard.
+    /**
+     * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $entries = Auth::user()->entries;
-        return view('entries.index', ['entries' => $entries]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('entries.create');
+        return $entries;
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\StoreEntryRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -40,19 +31,21 @@ class EntryController extends Controller
         $request['user_id'] = Auth::user()->id;
         $entry = new Entry($request->all());
         $entry->save();
-        return redirect('entries')->with('status', 'Entry saved!');
+        return response()->json([
+            "message" => "Entry Created"
+        ], 201); 
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Display the specified resource.
      *
-     * @param  \App\Models\Entry  $contact
+     * @param  \App\Models\Entry  $entry
      * @return \Illuminate\Http\Response
      */
-    public function edit(Entry $entry)
+    public function show(Entry $entry)
     {
         if($entry->user_id == Auth::user()->id){
-            return view('entries.edit', ['entry' => $entry]);
+            return $entry;
         }
         abort(403);
     }
@@ -60,15 +53,17 @@ class EntryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\StoreEntryRequest  $request
-     * @param  \App\Models\Entry  $contact
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Entry  $entry
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Entry $entry)
     {
         if($entry->user_id == Auth::user()->id){
             $entry->update($request->all());
-            return back()->with('status', 'Contact updated!');
+            return response()->json([
+                "message" => "Entry Updated"
+            ], 200); 
         }
         abort(403);
     }
@@ -76,14 +71,16 @@ class EntryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\entry  $entry
+     * @param  \App\Models\Entry  $entry
      * @return \Illuminate\Http\Response
      */
     public function destroy(Entry $entry)
     {
         if($entry->user_id == Auth::user()->id){
             $entry->delete();
-            return response(['msg' => 'Success'], 200) ->header('Content-Type', 'application/json');
+            return response()->json([
+                "message" => "Entry Deleted"
+            ], 202); 
         }
         abort(403);
     }
