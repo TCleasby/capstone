@@ -18,8 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('entries', EntryController::class);
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth:sanctum'])->group(function() {
+    Route::resource('entries', EntryController::class);
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
