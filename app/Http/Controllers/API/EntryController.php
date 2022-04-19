@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Entry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\EntryResource;
+use App\Http\Resources\EntriesResource;
 
 class EntryController extends Controller
 {
@@ -14,10 +16,30 @@ class EntryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $entries = Auth::user()->entries;
-        return $entries;
+        // start with the users entries
+        $query = Auth::user()->entries();
+
+        // if sorting, add the sort criteria with ->orderBy()
+        if($request->input('sort')){
+            $columns = explode(',', $request->input('sort'));
+            foreach($columns as $column){
+                if(substr($column, 0, 1) == '-'){
+                   $query = $query->orderBy(ltrim($column, '-'), 'desc'); 
+                } else {
+                    $query = $query->orderBy($column, 'asc');
+                }
+            }
+        }
+
+        // if paging, add with ->paginate()
+        if($request->input('page')){
+            return new EntriesResource($query->paginate(10));
+        }
+
+        // if not, go ahead and return results
+        return new EntriesResource($query->get());
     }
 
     /**
@@ -45,7 +67,7 @@ class EntryController extends Controller
     public function show(Entry $entry)
     {
         if($entry->user_id == Auth::user()->id){
-            return $entry;
+            return new EntryResource($entry);
         }
         abort(403);
     }

@@ -58,6 +58,20 @@ class EntryController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Entry  $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Entry $entry)
+    {
+        if($entry->user_id == Auth::user()->id){
+            return view('entries.edit', ['entry' => $entry]);
+        }
+        abort(403);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\StoreEntryRequest  $request
