@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreEntryRequest;
 use App\Models\Entry;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class EntryController extends Controller
 {
@@ -51,6 +50,20 @@ class EntryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Entry $entry)
+    {
+        if($entry->user_id == Auth::user()->id){
+            return view('entries.edit', ['entry' => $entry]);
+        }
+        abort(403);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Entry  $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Entry $entry)
     {
         if($entry->user_id == Auth::user()->id){
             return view('entries.edit', ['entry' => $entry]);

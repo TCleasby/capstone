@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EntryController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['auth:sanctum'])->group(function() {
+Route::middleware('auth:sanctum')->group(function() {
     Route::resource('entries', EntryController::class);
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

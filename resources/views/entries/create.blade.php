@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p>Entry Date<br />
-                <input type="text" name="upload_date" class="form-control datepicker" placeholder="YYYY-MM-DD" required>
+                <input type="text" name="upload_date" class="form-control datepicker" placeholder="YYYY-MM-DD HH:MM:SS" required>
                 </p>
             </div>
         </div>
