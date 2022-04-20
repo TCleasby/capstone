@@ -66,7 +66,7 @@ class EntryController extends Controller
     public function show(Entry $entry)
     {
         if($entry->user_id == Auth::user()->id){
-            return view('entries.edit', ['entry' => $entry]);
+            return view('entries.show', ['entry' => $entry]);
         }
         abort(403);
     }

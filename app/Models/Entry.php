@@ -9,11 +9,16 @@ class Entry extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['fda_id', 'upload_date', 'user_id'];
+    protected $fillable = ['description', 'servingSize', 'servingSizeUnit', 'householdServingFullText', 'upload_date', 'user_id'];
     protected $dates = ['upload_date'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function nutrients()
+    {
+        return $this->hasMany(Nutrients::class);
     }
 }

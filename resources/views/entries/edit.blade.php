@@ -4,8 +4,8 @@
         @method('PUT')
         <div class="row">
             <div class="col-md-12">
-                <p>FDA ID<br />
-                <input type="number" name="fda_id" class="form-control" placeholder="Enter Item ID" value="{{ $entry->fda_id }}" required>
+                <p>Food Name<br />
+                <input type="text" name="fda_id" class="form-control" placeholder="Enter Item ID" value="{{ $entry->description }}" required>
                 </p>
             </div>
         </div>

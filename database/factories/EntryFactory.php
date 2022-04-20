@@ -14,7 +14,10 @@ class EntryFactory extends Factory
     public function definition()
     {
         return [
-            'fda_id' => $this->faker->numberBetween(1, 424151),
+            'description' => $this->faker->sentence(),
+            'servingSize' => $this->faker->randomDigit(),
+            'servingSizeUnit' => $this->faker->word(),
+            'householdServingFullText' => $this->faker->word(),
             'upload_date' => $this->faker->date(),
             'user_id' => $this->faker->numberBetween(1, 3),
         ];

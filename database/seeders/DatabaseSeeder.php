@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             EntrySeeder::class,
+            NutrientsSeeder::class,
         ]);
         \App\Models\User::factory(2)->create();
         DB::table('users')->insert([
