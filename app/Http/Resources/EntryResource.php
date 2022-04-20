@@ -18,7 +18,10 @@ class EntryResource extends JsonResource
             'type' => 'entry',
             'id' => $this->id,
             'attributes' => [
-                'fda-id' => $this->fda_id,
+                'description' => $this->description,
+                'servingSize' => $this->servingSize,
+                'servingSizeUnit' => $this->servingSizeUnit,
+                'householdServingFullText' => $this->householdServingFullText,
                 'upload_date' => $this->upload_date->format('m-d-Y'),
             ] 
         ];
