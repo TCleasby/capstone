@@ -9,7 +9,7 @@ class Nutrients extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['food_id', 'nutrientName', 'unitName', 'value'];
+    protected $fillable = ['entry_id', 'nutrientName', 'unitName', 'value'];
 
     public function user()
     {

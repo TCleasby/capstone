@@ -23,7 +23,7 @@ class EntryResource extends JsonResource
                 'servingSizeUnit' => $this->servingSizeUnit,
                 'householdServingFullText' => $this->householdServingFullText,
                 'upload_date' => $this->upload_date->format('m-d-Y'),
-            ] 
+            ]
         ];
         
     }
