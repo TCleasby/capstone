@@ -19,6 +19,6 @@ class Entry extends Model
 
     public function nutrients()
     {
-        return $this->hasMany(Nutrients::class);
+        return $this->hasMany(Nutrients::class, "food_id", "id");
     }
 }

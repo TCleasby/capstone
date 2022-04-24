@@ -14,6 +14,7 @@ class EntryResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'type' => 'entry',
             'id' => $this->id,
@@ -23,7 +24,8 @@ class EntryResource extends JsonResource
                 'servingSizeUnit' => $this->servingSizeUnit,
                 'householdServingFullText' => $this->householdServingFullText,
                 'upload_date' => $this->upload_date->format('m-d-Y'),
-            ]
+            ],
+            'nutrients' => NutrientResource::collection($this->nutrients),
         ];
         
     }
