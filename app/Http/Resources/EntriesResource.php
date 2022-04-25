@@ -14,8 +14,6 @@ class EntriesResource extends ResourceCollection
      */
     public function toArray($request)
     {
-        return [
-            'Entries' => EntryResource::collection($this->collection)
-        ];
+        return EntryResource::collection($this->collection);
     }
 }
