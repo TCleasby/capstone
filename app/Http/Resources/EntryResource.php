@@ -23,7 +23,7 @@ class EntryResource extends JsonResource
                 'servingSize' => $this->servingSize,
                 'servingSizeUnit' => $this->servingSizeUnit,
                 'householdServingFullText' => $this->householdServingFullText,
-                'upload_date' => $this->upload_date->format('m-d-Y'),
+                'upload_date' => $this->upload_date->format('Y-m-d'),
             ],
             'nutrients' => NutrientResource::collection($this->nutrients),
         ];

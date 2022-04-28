@@ -50,9 +50,19 @@ class EntryController extends Controller
      */
     public function store(Request $request)
     {
+        // validate
         $request['user_id'] = Auth::user()->id;
+
+        // make entry object
         $entry = new Entry($request->all());
         $entry->save();
+
+        // nested nutrient objects
+        foreach ($request['nutrients'] as $obj) {
+            $nutrient = $entry->nutrient->create($obj);
+        }
+
+        // return resource
         return response()->json([
             "message" => "Entry Created"
         ], 201); 
