@@ -18,7 +18,7 @@ class NutrientResource extends JsonResource
             'type' => 'nutrient',
             'id' => $this->id,
             'attributes' => [
-                'nutrentName' => $this->nutrientName,
+                'nutrientName' => $this->nutrientName,
                 'unitName' => $this->unitName,
                 'value' => $this->value,
             ]
