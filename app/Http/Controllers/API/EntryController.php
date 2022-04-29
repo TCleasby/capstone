@@ -38,6 +38,11 @@ class EntryController extends Controller
             return new EntriesResource($query->paginate(10));
         }
 
+        // filtering by date
+        if($request->upload_date){
+            $query -> where('upload_date',$request->upload_date);
+        }
+
         // if not, go ahead and return results
         return new EntriesResource($query->get());
     }
@@ -60,6 +65,7 @@ class EntryController extends Controller
         // nested nutrient objects
         foreach ($request['nutrients'] as $obj) {
             $nutrient = $entry->nutrient->create($obj);
+            $nutrient->save();
         }
 
         // return resource
