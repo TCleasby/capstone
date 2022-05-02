@@ -63,7 +63,7 @@ class EntryController extends Controller
         $entry->save();
 
         // nested nutrient objects
-        foreach ($request['nutrients'] as $obj) {
+        foreach ($request['foodNutrients'] as $obj) {
             $nutrient = $entry->nutrient->create($obj);
             $nutrient->save();
         }
