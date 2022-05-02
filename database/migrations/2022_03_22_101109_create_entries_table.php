@@ -16,9 +16,9 @@ class CreateEntriesTable extends Migration
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
             $table->String('description');
-            $table->Integer('servingSize');
-            $table->String('servingSizeUnit');
-            $table->String('householdServingFullText');
+            $table->Integer('servingSize')->nullable()->default(null);
+            $table->String('servingSizeUnit')->nullable()->default(null);
+            $table->String('householdServingFullText')->nullable()->default(null);
             $table->date('upload_date');
             $table->timestamps();
         });
