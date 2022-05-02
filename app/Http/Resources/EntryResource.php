@@ -25,7 +25,7 @@ class EntryResource extends JsonResource
                 'householdServingFullText' => $this->householdServingFullText,
                 'upload_date' => $this->upload_date->format('Y-m-d'),
             ],
-            'nutrients' => NutrientResource::collection($this->nutrients),
+            'foodNutrients' => NutrientResource::collection($this->nutrients),
         ];
         
     }
